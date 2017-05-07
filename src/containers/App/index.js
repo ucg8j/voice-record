@@ -3,15 +3,19 @@ import { connect }           from 'react-redux';
 import injectTapEventPlugin  from 'react-tap-event-plugin';
 import getMuiTheme           from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider      from 'material-ui/styles/MuiThemeProvider';
-import { HashRouter, Route } from 'react-router-dom'
+import { HashRouter,
+				 Route,
+				 Switch,
+				 Redirect } 				 from 'react-router-dom';
 
 // global styles for entire app
 import './styles/app.scss';
 
 /* application containers */
-import Header     from 'containers/Header';
-import LeftNavBar from 'containers/LeftNavBar';
-import Home       from 'containers/Home';
+import Header     		from 'containers/Header';
+import LeftNavBar 		from 'containers/LeftNavBar';
+import RecordView 		from 'containers/RecordView';
+import RecordingsView from 'containers/RecordingsView';
 
 injectTapEventPlugin();
 
@@ -24,15 +28,19 @@ export class App extends Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div>
-          <Header />
-          <div className="container">
-            <HashRouter>
-              <div>
-                <Route exact path="/" component={Home}/>
+          <HashRouter>
+            <div>
+              <Header />
+              <div className="container">
+              	<Switch>
+	                <Route path="/record" 		component={RecordView} />
+	                <Route path="/recordings" component={RecordingsView} />
+	                <Redirect from="/" to="/record" />
+              	</Switch>
               </div>
-            </HashRouter>
-          </div>
-          <LeftNavBar />
+              <LeftNavBar />
+            </div>
+          </HashRouter>
         </div>
       </MuiThemeProvider>
     );

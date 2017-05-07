@@ -2,6 +2,7 @@ import React, { Component }   from 'react';
 import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AppBar                 from 'components/AppBar';
+import Navigation							from 'components/Navigation';
 
 /* actions */
 import * as uiActionCreators from 'core/actions/actions-ui';
@@ -19,11 +20,11 @@ class Header extends Component {
   }
 
   render() {
-
     return (
       <div className={styles}>
         <header>
-          <AppBar onLeftIconButtonTouchTap= {this.handleToggle} />
+          <AppBar onLeftIconButtonTouchTap={this.handleToggle} />
+        <Navigation />
         </header>
       </div>
     );
